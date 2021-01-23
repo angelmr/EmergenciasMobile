@@ -16,6 +16,7 @@
             android:id="@+id/btnEmergenciaP"
             android:layout_width="337dp"
             android:layout_height="359dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/emergencia" />
 
         <TextView

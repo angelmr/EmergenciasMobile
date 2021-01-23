@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 usuario=edtUsuario.getText().toString();
                 password=edtPassword.getText().toString();
                 if (!usuario.isEmpty() && !password.isEmpty()) {
-                    validarUsuario("http://192.168.100.4/Emergencia/web_services/login_usuario.php");
+
+                    validarUsuario(getResources().getString(R.string.login_usuario));
                 }else {
                     Toast.makeText(MainActivity.this,"Nose permite campos vacios", Toast.LENGTH_SHORT).show();
                 }
@@ -84,12 +85,13 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     private  void guardarPreferencias(){
-        SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
+        SharedPreferences preferences =
+                getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("usuario",edtUsuario.getText().toString());
         editor.putString("password",edtPassword.getText().toString());
         editor.putBoolean("sesion", true);
-        editor.commit();
+        editor.apply();
     }
     private void recuperarPreferencias(){
         SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);

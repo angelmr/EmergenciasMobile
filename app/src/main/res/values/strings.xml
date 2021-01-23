@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EmergenciasMobile</string>
+    <string name="url_pos_paciente">http://192.168.1.6/Emergencias-master/Emergencias-master/web_services/update_pos_paciente.php</string>
+    <string name="login_usuario">http://192.168.1.6/Emergencias-master/Emergencias-master/web_services/login_usuario.php</string>
 </resources>
