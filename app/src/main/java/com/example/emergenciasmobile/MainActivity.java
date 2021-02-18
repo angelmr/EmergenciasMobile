@@ -44,10 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 usuario=edtUsuario.getText().toString();
                 password=edtPassword.getText().toString();
                 if (!usuario.isEmpty() && !password.isEmpty()) {
-
                     validarUsuario(getResources().getString(R.string.login_usuario));
                 }else {
-                    Toast.makeText(MainActivity.this,"Nose permite campos vacios", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"No se permite campos vacios", Toast.LENGTH_SHORT).show();
                 }
 
             }

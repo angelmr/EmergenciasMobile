@@ -36,9 +36,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class EmergenciaActivity extends AppCompatActivity {
 
     private Button btnCerrar;
     private ImageButton ImgButtonEmergency;
@@ -71,8 +70,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         .edit()
                         .clear()
                         .apply();
-
-                Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
+                Intent intent = new Intent(EmergenciaActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -90,9 +88,9 @@ public class PrincipalActivity extends AppCompatActivity {
                         enviarPosicione();
                     }
                 }else
-                    {
-                        solicitarPermisos();
-                    }
+                {
+                    solicitarPermisos();
+                }
             }
         });
 
@@ -104,7 +102,7 @@ public class PrincipalActivity extends AppCompatActivity {
     {
         if (  !mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 !mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            Toast.makeText(PrincipalActivity.this, "Activar GPS", Toast.LENGTH_LONG)
+            Toast.makeText(EmergenciaActivity.this, "Activar GPS", Toast.LENGTH_LONG)
                     .show();
 
             return false;
@@ -133,7 +131,7 @@ public class PrincipalActivity extends AppCompatActivity {
             if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION))
             {
 
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(PrincipalActivity.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(EmergenciaActivity.this);
                 mBuilder.setTitle("Permisos Location");
                 mBuilder.setMessage("Por favor otorgar permisos de ubicación");
                 mBuilder.setCancelable(false);
@@ -150,11 +148,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
             }else
-                {
-                    /****/
-                    ActivityCompat.requestPermissions(PrincipalActivity.this,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},150);
-                }
+            {
+                /****/
+                ActivityCompat.requestPermissions(EmergenciaActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},150);
+            }
         }
     }
 
@@ -175,9 +173,9 @@ public class PrincipalActivity extends AppCompatActivity {
                     }
 
                 }else
-                    {
-                        solicitarPermisos();
-                    }
+                {
+                    solicitarPermisos();
+                }
                 break;
         }
     }
@@ -192,8 +190,7 @@ public class PrincipalActivity extends AppCompatActivity {
             SharedPreferences mSharedPreferences = getSharedPreferences("preferenciasLogin",MODE_PRIVATE);
             String cedula = mSharedPreferences.getString("usuario","error");
 
-            String url = getResources().getString(R.string.url_emergencia)+"?cedula="+cedula
-                    +"&lat="+mLocation.getLatitude()+"&lng="+mLocation.getLongitude();
+            String url = getResources().getString(R.string.url_cancelar_emergencia)+"?cedula="+cedula;
 
             Log.e("LOCATION",url);
 
@@ -206,17 +203,14 @@ public class PrincipalActivity extends AppCompatActivity {
                     try {
                         if(response.getString("status").equals("ok"))
                         {
-                            Toast.makeText(PrincipalActivity.this, "Emergencia enviada", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(PrincipalActivity.this, EmergenciaActivity.class);
-                            startActivity(intent);
-                            finish();
+                            Toast.makeText(EmergenciaActivity.this, "Emergencia cancelada", Toast.LENGTH_SHORT).show();
                         }else
                         {
-                            Toast.makeText(PrincipalActivity.this, "Emergencia no enviada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmergenciaActivity.this, "Emergencia no enviada", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e)
                     {
-                        Toast.makeText(PrincipalActivity.this, e.getMessage().toString()
+                        Toast.makeText(EmergenciaActivity.this, e.getMessage().toString()
                                 , Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -224,26 +218,26 @@ public class PrincipalActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error)
                 {
-                    Toast.makeText(PrincipalActivity.this, error.getMessage().toString()
+                    Toast.makeText(EmergenciaActivity.this, error.getMessage().toString()
                             , Toast.LENGTH_SHORT).show();
                 }
             });
 
-            mRequestQueue = Volley.newRequestQueue(PrincipalActivity.this);
+            mRequestQueue = Volley.newRequestQueue(EmergenciaActivity.this);
             mRequestQueue.add(mJsonObjectRequest);
         }else
         {
-            Toast.makeText(PrincipalActivity.this, "No se puede Obtener su posición", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EmergenciaActivity.this, "No se puede Obtener su posición", Toast.LENGTH_SHORT).show();
         }
     }
-        private boolean locationPermisos()
+    private boolean locationPermisos()
     {
-       if(ContextCompat
-               .checkSelfPermission(PrincipalActivity.this
-                       ,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-       {
-           return true;
-       }
-       return false;
+        if(ContextCompat
+                .checkSelfPermission(EmergenciaActivity.this
+                        ,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
+            return true;
+        }
+        return false;
     }
 }

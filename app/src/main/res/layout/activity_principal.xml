@@ -12,21 +12,21 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Presione en Caso de Emergencia"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
         <ImageButton
             android:id="@+id/btnEmergenciaP"
             android:layout_width="337dp"
             android:layout_height="359dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/emergencia" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="BIENVENIDO AL SISTEMA"
-            android:textSize="36sp"
-            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnCerrar"

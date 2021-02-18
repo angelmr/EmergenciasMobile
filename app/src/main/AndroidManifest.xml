@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmergenciasMobile"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".EmergenciaActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".PresentacionActivity">
             <intent-filter>
